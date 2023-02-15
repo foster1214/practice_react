@@ -20,10 +20,11 @@ class App extends Component {
         {id: 1, title: 'HTML', desc: 'HTML is for information'},
         {id: 2, title: 'CSS', desc: 'CSS is for design'},
         {id: 3, title: 'Javascript', desc: 'Javascript is for interactive'}
-      ],
-      selected_content_id: 4
+      ]
     }
+    this.selected_content_id = 2;
   }
+
   getReadContent(){
     var i = 0;
     while(i < this.state.contents.length){
@@ -97,7 +98,7 @@ class App extends Component {
          }.bind(this)} 
         data={this.state.contents}>
        </TOC>
-       <Control onChangeMode={function(_mode){
+       <Control mode = {this.state.mode} onChangeMode={function(_mode){
         if(_mode === 'delete'){
           if(window.confirm("삭제하시겠습니까?")){
             var _contents = Array.from(this.state.contents);
@@ -111,7 +112,7 @@ class App extends Component {
             }
             this.setState({
               mode: 'welcome',
-              selected_content_id: 0,
+              selected_content_id: -1,
               contents:_contents
             });
             alert('삭제되었습니다.');
